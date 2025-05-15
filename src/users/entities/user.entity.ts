@@ -1,24 +1,28 @@
-import { Columm, Entity,DeleteDateColumn } from 'typeorm';
+import { 
+	Column, 
+	Entity,
+	DeleteDateColumn,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
-
-	@Columm({primary: true, generated: true})
+	@PrimaryGeneratedColumn()
   id: number;
-	
-	@Columm()
+
+	@Column()
   name: string;
 
-	@Columm({unique: true, nullable: false})
+	@Column({unique: true, nullable: false})
   email: string;
 
-	@Columm({nullable: false})
+	@Column({nullable: false})
   password: string;
 
-	@Columm({default: 'user'})
+	@Column({default: 'user'})
 	rol: string;
 
-	@DeleteDateColumn()
+  @DeleteDateColumn()
 	deletedAt: Date;
 
 }

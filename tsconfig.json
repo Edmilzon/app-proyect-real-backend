@@ -20,6 +20,7 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "strictPropertyInitialization": false,
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
