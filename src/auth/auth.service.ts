@@ -5,12 +5,13 @@ import { RegisterDto } from './dto/register.dto';
 import * as bycryptjs from 'bcryptjs'
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { emitWarning } from 'process';
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        private readonly userService: UsersService
+        private readonly userService: UsersService,
         private readonly jwtService: JwtService
     ){
 
@@ -40,6 +41,15 @@ export class AuthService {
             throw new UnauthorizedException('la contraseña es incorrecta')
         }
 
-        return user;
+        const payload= {email: user.email};
+        
+        const token =  await this.jwtService.signAsync(payload)    
+
+        const email = loginDto.email;
+
+        return {
+            token,
+            email
+        };
     }
 }
